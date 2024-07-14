@@ -1,0 +1,44 @@
+# Shopper Sentiments 
+
+![image.png](attachment:21f952fa-8e28-4b52-8a69-b3c2513ac3e9.png)
+
+# Introduction to ShopperSentiments
+Welcome to the "Introduction to ShopperSentiments Dataset" notebook! In this brief exploration, we provide an overview of the TeePublic Fashion Store Reviews dataset, aiming to offer a glimpse into the diverse landscape of customer sentiments. This dataset, rich with over 200,000 reviews, serves as a valuable resource for understanding customer experiences and preferences within the realm of online fashion retail. As you delve into this basic introduction, we invite you to unleash the potential of this dataset by creating models such as sentiment analysis and beyond. Whether you're interested in deciphering trends, exploring geographic patterns, or uncovering insights into customer satisfaction, ShopperSentiments provides a robust foundation for your data-driven endeavors in the dynamic world of fashion reviews
+
+Shopper sentiments encompass the
+
+                                attitudes, feelings, and perceptions
+                                
+that consumers have towards shopping, influenced by factors like 
+
+                            economic conditions, personal finances, product quality,
+                                and customer service experiences.
+                                
+Positive sentiments can drive higher spending and brand loyalty, while negative sentiments may result in reduced consumer spending and a shift towards competitors. Understanding these sentiments helps businesses tailor their strategies to meet consumer expectations and enhance overall shopping experiences.
+# Import
+import plotly.express as px
+import pandas as pd
+import numpy as np
+# Read Data
+df = pd.read_csv("/kaggle/input/shoppersentiments/TeePublic_review.csv", encoding="latin-1")
+df
+df.head()
+df.info()
+df.describe()
+df.isnull()
+df.isnull().sum()
+df.columns
+df.shape
+# Distribution of Ratings
+fig1 = px.histogram(df, x='review-label', title='Distribution of Ratings')
+fig1.show()
+# Monthly Review Count
+fig2 = px.bar(df.groupby(['year', 'month']).size().reset_index(name='count'), 
+              x='month', y='count', color='year', 
+              title='Monthly Review Count Over the Years')
+fig2.show()
+# Geospatial Distribution of Reviews
+fig3 = px.scatter_geo(df, lat='latitude', lon='longitude', color='review-label', 
+                      title='Geospatial Distribution of Reviews')
+
+fig3.show()
